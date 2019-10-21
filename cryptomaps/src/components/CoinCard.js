@@ -1,24 +1,23 @@
 import React from 'react'
 import { Card } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { yellow } from '@material-ui/core/colors';
+import { flexbox } from '@material-ui/system';
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
+
+
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiCard: {
+      width: {
+        color: 'white',
+      },
+    },
   },
-  media: {
-    height: 140,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  }
 });
 
 // const newStyles = makeStyles({
@@ -41,6 +40,33 @@ const useStyles = makeStyles({
 
 
 function CoinCard(props){
+
+  let sizeBox = Number(props.priceUsd);
+console.log(sizeBox)
+let percentageSizeBox = 0;
+let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
+percentageSizeBox = changeSizeBox(sizeBox)
+console.log(props.symbol)
+console.log("This is %", percentageSizeBox)
+  
+const useStyles = makeStyles({
+  card: {
+    maxWidth: percentageSizeBox * 3 || 0,
+    maxHeight: percentageSizeBox * 3 || 0,
+    backgroundColor: "yellow"
+  },
+  media: {
+    height: 140,
+  },
+  title: {
+    fontSize: percentageSizeBox,
+  },
+  pos: {
+    display: flexbox,
+    flexDirection: "column",
+    marginBottom: 12,
+  }
+});
 
     const classes = useStyles();
     //const highlight = newStyles();
