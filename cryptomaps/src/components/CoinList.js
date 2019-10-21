@@ -36,10 +36,10 @@ function CoinList(props){
 
   const changeColor = () => {
       if(highlight === true){
-          {backgroundColor: "yellow"}
+          return {backgroundColor: "yellow"}
       }
       else{
-          null
+          return null
       }
   }
 
