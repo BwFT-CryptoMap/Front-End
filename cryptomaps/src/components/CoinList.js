@@ -24,6 +24,7 @@ function CoinList(props){
     axios.get(`https://data.messari.io/api/v1/markets/prices-legacy`)
     .then(res => {
       console.log("this is from CoinList", res);
+      setDisplayInfo(res.data.data)
       const items = displayInfo.filter(item => item.symbol.toLowerCase().includes(query.toLowerCase()))
      setHighlight(items)
     })
