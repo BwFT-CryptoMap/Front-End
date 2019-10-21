@@ -36,6 +36,9 @@ function CoinList(props){
        })
      setHighlight(items)
     })
+    .catch(err => {
+      console.log("Did not receive data from API call", err)
+    })
   }, [query])
 
   const eventHandle = event => {
