@@ -31,7 +31,7 @@ function CoinList(props){
          return null
         }
         else{
-          return item.symbol.toLowerCase().includes(query.toLowerCase())
+          return item.symbol.toLowerCase().startsWith(query.toLowerCase())
         }
        })
      setHighlight(items)
@@ -52,6 +52,7 @@ function CoinList(props){
       }
   }
 
+  console.log(highlight)
 
     return(
         <Fragment>
