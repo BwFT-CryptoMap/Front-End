@@ -1,4 +1,6 @@
 import React, {useState, useEffect, Fragment} from 'react';
+import axios from 'axios'
+
 import {useDispatch} from 'react-redux';
 
 
@@ -22,7 +24,16 @@ function CoinList(props){
     axios.get(`https://data.messari.io/api/v1/markets/prices-legacy`)
     .then(res => {
       console.log("this is from CoinList", res);
-      const items = displayInfo.filter(item => item.symbol.toLowerCase().includes(query.toLowerCase()))
+      setDisplayInfo(res.data.data)
+      const items = displayInfo.filter(item =>
+       { if(item.symbol === null){
+         
+         return null
+        }
+        else{
+          return item.symbol.toLowerCase().includes(query.toLowerCase())
+        }
+       })
      setHighlight(items)
     })
   }, [query])
@@ -34,10 +45,10 @@ function CoinList(props){
 
   const changeColor = () => {
       if(highlight === true){
-          {backgroundColor: "yellow"}
+          return {backgroundColor: "yellow"}
       }
       else{
-          null
+          return null
       }
   }
 
