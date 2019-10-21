@@ -43,25 +43,35 @@ function CoinList(props){
   }
 
 
-  const changeColor = () => {
-      if(highlight === true){
-          return {backgroundColor: "yellow"}
-      }
-      else{
-          return null
-      }
-  }
+  // const changeColor = () => {
+  //     if(highlight.includes(displayInfo)){
+  //         return {backgroundColor: "yellow"}
+  //     }
+  //     else{
+  //         return null
+  //     }
+  // }
 
-  console.log(highlight)
+  console.log("this is highlight", highlight)
 
     return(
         <Fragment>
             <SearchForm eventHandle={eventHandle} query={query} />
-            {displayInfo.map(  (display, index) =>
-                 (<CoinCard key={index} symbol={display.symbol} priceUsd={display.priceUsd} percentageChange24HrUsd={display.percentageChange24HrUsd} style={changeColor}/>)
-                )}
+            {
+
+
+              displayInfo.map(  (display, index) =>
+              (
+               <CoinCard key={index} symbol={display.symbol} priceUsd={display.priceUsd} percentageChange24HrUsd={display.percentageChange24HrUsd} />)
+              )
+            
+             }
         </Fragment>
     )
 }
 
 export default CoinList
+
+
+
+// style={`${highlight.includes(display.symbol)? {backgroundColor : 'yellow'} : {backgroundColor: "inherit"} }`}

@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { yellow } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   card: {
@@ -20,12 +21,30 @@ const useStyles = makeStyles({
   }
 });
 
+// const newStyles = makeStyles({
+//   card: {
+//     maxWidth: 345,
+//     backgroundColor: "yellow"
+//   },
+//   media: {
+//     height: 140,
+//   },
+//   title: {
+//     fontSize: 14,
+//   },
+//   pos: {
+//     marginBottom: 12,
+//   }
+// });
+
 //if we use React Fragment it won't include any html markup of its own but it can still be used as a divider, may be useful for more complex styling
 
 
 function CoinCard(props){
 
     const classes = useStyles();
+    //const highlight = newStyles();
+
 
     return(
         <Card className={classes.card}>
@@ -49,3 +68,5 @@ function CoinCard(props){
 }
 
 export default CoinCard
+
+//`${props.changeColor? highlight.card : classes.card}`
