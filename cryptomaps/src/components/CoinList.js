@@ -25,7 +25,15 @@ function CoinList(props){
     .then(res => {
       console.log("this is from CoinList", res);
       setDisplayInfo(res.data.data)
-      const items = displayInfo.filter(item => item.symbol.toLowerCase().includes(query.toLowerCase()))
+      const items = displayInfo.filter(item =>
+       { if(item.symbol === null){
+         
+         return null
+        }
+        else{
+          return item.symbol.toLowerCase().includes(query.toLowerCase())
+        }
+       })
      setHighlight(items)
     })
   }, [query])
