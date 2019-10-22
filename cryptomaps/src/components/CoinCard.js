@@ -9,17 +9,6 @@ import { flexbox } from '@material-ui/system';
 
 
 
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiCard: {
-      width: {
-        color: 'white',
-      },
-    },
-  },
-});
-
 // const newStyles = makeStyles({
 //   card: {
 //     maxWidth: 345,
@@ -53,7 +42,11 @@ const useStyles = makeStyles({
   card: {
     maxWidth: percentageSizeBox * 3 || 0,
     maxHeight: percentageSizeBox * 3 || 0,
-    backgroundColor: "yellow"
+    backgroundColor: "yellow",
+    display: "flex",
+    flexWrap: 'nowrap',
+    flexDirection: "row",
+    alignContent: "flex-start"
   },
   media: {
     height: 140,
@@ -62,8 +55,7 @@ const useStyles = makeStyles({
     fontSize: percentageSizeBox,
   },
   pos: {
-    display: flexbox,
-    flexDirection: "column",
+   
     marginBottom: 12,
   }
 });
@@ -73,17 +65,17 @@ const useStyles = makeStyles({
 
 
     return(
-        <Card className={classes.card}>
+        <Card display="flexbox" className={classes.card}>
       <CardActionArea>
         <CardContent>
         <Typography gutterBottom variant="h5" component="h2" alt="ticker symbol">
         {props.symbol}
       </Typography>
           <Typography gutterBottom variant="h5" component="h2" alt="displaying the current price in US dollars">
-            {props.priceUsd}
+          {props.priceUsd ? '$' + props.priceUsd.toFixed(2): null}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.percentageChange24HrUsd}
+            {{props.percentageChange24HrUsd ? props.percentageChange24HrUsd > 0 ? '+' + props.percentageChange24HrUsd.toFixed(2) + '%' : props.percentageChange24HrUsd.toFixed(2) + '%' : null}
           </Typography>
         </CardContent>
       </CardActionArea>
