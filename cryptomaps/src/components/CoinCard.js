@@ -40,10 +40,15 @@ function CoinCard(props){
   
 const useStyles = makeStyles({
   card: {
-    // maxWidth: percentageSizeBox * 3 || 0,
-    // maxHeight: percentageSizeBox * 3 || 0,
+     maxWidth: props.width,
+    maxHeight: props.height,
     backgroundColor: "yellow",
-    // display: "flex",
+    position: "absolute",
+    left: props.x,
+    top: props.y,
+    border: "3px solid blue",
+    zIndex: 2147483647,
+     display: "inherit",
     // flexWrap: 'nowrap',
     // flexDirection: "row",
     // alignContent: "flex-start"
@@ -63,7 +68,7 @@ const useStyles = makeStyles({
     const classes = useStyles();
     //const highlight = newStyles();
 
-
+console.log(props.percentageChange24HrUsd)
     return(
         <Card display="flexbox" className={classes.card}>
       <CardActionArea>
@@ -88,3 +93,18 @@ const useStyles = makeStyles({
 export default CoinCard
 
 //`${props.changeColor? highlight.card : classes.card}`
+
+
+
+
+
+//
+// <h1>{symbol}</h1>
+// <h2>{priceUsd ? '$' + priceUsd.toFixed(2): null}</h2>
+// <h2>{percentageChange24HrUsd ? percentageChange24HrUsd > 0 ? '+' + percentageChange24HrUsd.toFixed(2) + '%' : percentageChange24HrUsd.toFixed(2) + '%' : null}</h2>
+
+
+// <CoinCard symbol={symbol} priceUsd={priceUsd} percentageChange24HrUsd={percentageChange24HrUsd} />
+
+
+
