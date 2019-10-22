@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Svg, Rect } from '@potion/element'
-import { Treemap } from '@potion/layout'
+import { Svg, Rect } from '@potion/element';
+import { Treemap } from '@potion/layout';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default () => {
     const [mapData, setMapData] = useState([]);
@@ -25,6 +26,13 @@ export default () => {
     }
 
     return (
+        <TransformWrapper defaultScale={1}>
+            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                <React.Fragment>
+                    <div className="tools">
+              <button onClick={resetTransform}>Reset</button>
+                    </div>
+            <TransformComponent>
         <Svg width={1024} height={600}>
             <Treemap
                 data={{
@@ -47,5 +55,9 @@ export default () => {
 
             ))}</Treemap>
         </Svg >
+        </TransformComponent>
+        </React.Fragment>
+            )}
+        </TransformWrapper>
     )
 }
