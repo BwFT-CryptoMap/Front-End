@@ -40,12 +40,12 @@ function CoinCard(props){
   
 const useStyles = makeStyles({
   card: {
-     maxWidth: props.width,
+    left: props.x,
+    top: props.y,
+    maxWidth: props.width,
     maxHeight: props.height,
     backgroundColor: "yellow",
     position: "absolute",
-    left: props.x,
-    top: props.y,
     border: "3px solid blue",
     zIndex: 2147483647,
      display: "inherit",
