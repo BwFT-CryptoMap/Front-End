@@ -40,15 +40,13 @@ function CoinCard(props){
   
 const useStyles = makeStyles({
   card: {
-    left: props.x,
-    top: props.y,
-    maxWidth: props.width,
-    maxHeight: props.height,
-    backgroundColor: "yellow",
-    position: "absolute",
-    border: "3px solid blue",
-    zIndex: 2147483647,
-     display: "inherit",
+    // left: props.x/10,
+    // bottom: props.y/10,
+    // maxWidth: Math.round(props.width),
+    // maxHeight: Math.round(props.height),
+    // backgroundColor: "yellow",
+    // border: "3px solid blue",
+    // zIndex: 2147483647,
     // flexWrap: 'nowrap',
     // flexDirection: "row",
     // alignContent: "flex-start"
@@ -57,14 +55,14 @@ const useStyles = makeStyles({
     height: 140,
   },
   title: {
-    fontSize: 14,
+    fontSize: 76,
   },
   pos: {
    
     marginBottom: 12,
   }
 });
-
+console.log("this is props x", props.x)
     const classes = useStyles();
     //const highlight = newStyles();
 

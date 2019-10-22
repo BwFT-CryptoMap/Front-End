@@ -57,7 +57,6 @@ export default () => {
     //         <text dx={100} x="10%" y="50%" fill="grey" fontSize="76px" color= "black" zIndex="2147483647">Whatever</text>
            
     //         </Rect>
-    //<Text x={x1 - x0} y={y1 - y0} fontSize="76px" color="black">{data.symbol}</Text>
 
   
      console.log("This is children", arrangeData(mapData))
@@ -71,11 +70,32 @@ export default () => {
                 sum={datum => datum.value}
                 size={[1024, 600]}
                 nodeEnter={d => ({ ...d, r: 0 })} 
+                animate
                 >
                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
                     <>
-                    
-                    <CoinCard
+                    <Text
+                    x={x0 + (x1-x0) / 2}
+                    y={y0 + (y1-y0) / 2}
+                    fontSize={Number((x1-x0) /10)}
+                    color="black">
+                        {data.symbol}
+                    </Text>
+                    <Text
+                    x={x0 + (x1-x0) / 2.45}
+                    y={y0 + (y1-y0) / 1.6}
+                    fontSize={Number((x1-x0) /12)}
+                    color="black">
+                        {data.priceUsd ? '$' + data.priceUsd.toFixed(2): null}
+                    </Text>
+                    <Text
+                    x={x0 + (x1-x0) / 2.15}
+                    y={y0 + (y1-y0) / 1.4}
+                    fontSize={Number((x1-x0) /14)}
+                    color="black">
+                        {data.percentageChange24HrUsd ? data.percentageChange24HrUsd > 0 ? '+' + data.percentageChange24HrUsd.toFixed(2) + '%' : data.percentageChange24HrUsd.toFixed(2) + '%' : null}
+                    </Text>
+                    <Rect
                         key={key}
                         x={x0}
                         y={y0}
@@ -83,9 +103,6 @@ export default () => {
                         height={y1 - y0}
                         fill='none'
                         stroke='black'
-                        symbol={data.symbol}
-                        priceUsd={data.priceUsd}
-                        percentageChange24HrUsd={data.percentageChange24HrUsd}
                     />
                     
                     </>
