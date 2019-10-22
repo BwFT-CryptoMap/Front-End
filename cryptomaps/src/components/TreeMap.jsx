@@ -22,7 +22,7 @@ export default () => {
     const arrangeData = (data) => {
         let totalMarketCap = data.reduce((a, c) => a + c.currentMarketcap, 0)
         return data.map(datum => {
-            return { key: datum.id, value: getPercentage(datum.currentMarketcap, totalMarketCap) }
+            return { key: datum.id, value: getPercentage(datum.currentMarketcap, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd }
         })
     }
 
@@ -37,23 +37,27 @@ export default () => {
                 nodeEnter={d => ({ ...d, r: 0 })}
                 animate
             >{nodes => nodes.map(({ key, x0, y0, x1, y1 }) => (
-                <CoinCard
+                <Rect
                     key={key}
                     x={x0}
                     y={y0}
                     width={x1 - x0}
                     height={y1 - y0}
-                    fill='red'
+                    fill={"white"}
                     stroke='black'
-                    symbol={mapData.symbol}
-                    priceUsd={mapData.priceUsd}
-                    percentageChange24HrUsd={mapData.percentageChange24HrUsd}/>
-                
-                   
-               
-               
+                    >
+                        <div>
+                            <h1>{mapData.symbol}</h1>
+                            <h2>{mapData.priceUsd ? '$' + mapData.priceUsd.toFixed(2): null}</h2>
+                            <h2>{mapData.percentageChange24HrUsd ? mapData.percentageChange24HrUsd > 0 ? '+' + mapData.percentageChange24HrUsd.toFixed(2) + '%' : mapData.percentageChange24HrUsd.toFixed(2) + '%' : null}</h2>
+                        </div>
+                    
+                    </Rect>
 
-            ))}</Treemap>
+            ))}
+            
+            
+            </Treemap>
         </Svg >
     )
 }
