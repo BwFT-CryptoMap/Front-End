@@ -37,7 +37,7 @@ export default () => {
                 nodeEnter={d => ({ ...d, r: 0 })}
                 animate
             >{nodes => nodes.map(({ key, x0, y0, x1, y1 }) => (
-                <Rect
+                <CoinCard
                     key={key}
                     x={x0}
                     y={y0}
@@ -45,9 +45,20 @@ export default () => {
                     height={y1 - y0}
                     fill='red'
                     stroke='black'
-                />
+                    symbol={mapData.symbol}
+                    priceUsd={mapData.priceUsd}
+                    percentageChange24HrUsd={mapData.percentageChange24HrUsd}/>
+                
+                   
+               
+               
 
             ))}</Treemap>
         </Svg >
     )
 }
+
+
+
+
+

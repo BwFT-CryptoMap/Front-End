@@ -30,29 +30,29 @@ import { flexbox } from '@material-ui/system';
 
 function CoinCard(props){
 
-  let sizeBox = Number(props.priceUsd);
-console.log(sizeBox)
-let percentageSizeBox = 0;
-let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
-percentageSizeBox = changeSizeBox(sizeBox)
-console.log(props.symbol)
-console.log("This is %", percentageSizeBox)
+//   let sizeBox = Number(props.priceUsd);
+// console.log(sizeBox)
+// let percentageSizeBox = 0;
+// let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
+// percentageSizeBox = changeSizeBox(sizeBox)
+// console.log(props.symbol)
+// console.log("This is %", percentageSizeBox)
   
 const useStyles = makeStyles({
   card: {
-    maxWidth: percentageSizeBox * 3 || 0,
-    maxHeight: percentageSizeBox * 3 || 0,
+    // maxWidth: percentageSizeBox * 3 || 0,
+    // maxHeight: percentageSizeBox * 3 || 0,
     backgroundColor: "yellow",
-    display: "flex",
-    flexWrap: 'nowrap',
-    flexDirection: "row",
-    alignContent: "flex-start"
+    // display: "flex",
+    // flexWrap: 'nowrap',
+    // flexDirection: "row",
+    // alignContent: "flex-start"
   },
   media: {
     height: 140,
   },
   title: {
-    fontSize: percentageSizeBox,
+    fontSize: 14,
   },
   pos: {
    
