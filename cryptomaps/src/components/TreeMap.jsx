@@ -45,8 +45,7 @@ export default () => {
                     height={y1 - y0}
                     fill='red'
                     stroke='black'
-                ><h2>{mapData.priceUsd ? '$' + mapData.priceUsd.toFixed(2): null}</h2>
-                <h2>{mapData.percentageChange24HrUsd ? mapData.percentageChange24HrUsd > 0 ? '+' + mapData.percentageChange24HrUsd.toFixed(2) + '%' : mapData.percentageChange24HrUsd.toFixed(2) + '%' : null}</h2></Rect>
+                />
 
             ))}</Treemap>
         </Svg >

@@ -75,7 +75,7 @@ const useStyles = makeStyles({
           {props.priceUsd ? '$' + props.priceUsd.toFixed(2): null}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {{props.percentageChange24HrUsd ? props.percentageChange24HrUsd > 0 ? '+' + props.percentageChange24HrUsd.toFixed(2) + '%' : props.percentageChange24HrUsd.toFixed(2) + '%' : null}
+            {props.percentageChange24HrUsd ? props.percentageChange24HrUsd > 0 ? '+' + props.percentageChange24HrUsd.toFixed(2) + '%' : props.percentageChange24HrUsd.toFixed(2) + '%' : null}
           </Typography>
         </CardContent>
       </CardActionArea>
