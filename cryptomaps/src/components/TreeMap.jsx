@@ -6,6 +6,8 @@ import * as d3 from "d3";
 
 import CoinCard from './CoinCard';
 
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 export default () => {
     const [mapData, setMapData] = useState([]);
 
@@ -64,8 +66,15 @@ export default () => {
 
      console.log("This is children", arrangeData(mapData))
     return (
-        <Svg  className="test" width={1024} height={600} opacity={1}>
-            <Treemap 
+        <TransformWrapper defaultScale={1}>
+            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                <React.Fragment>
+                    <div className="tools">
+              <button onClick={resetTransform}>Reset</button>
+                    </div>
+            <TransformComponent>
+        <Svg width={1024} height={600}>
+            <Treemap
                 data={{
                     children: arrangeData(mapData)
                     
@@ -122,6 +131,10 @@ export default () => {
             
             </Treemap>
         </Svg >
+        </TransformComponent>
+        </React.Fragment>
+            )}
+        </TransformWrapper>
     )
 }
 
