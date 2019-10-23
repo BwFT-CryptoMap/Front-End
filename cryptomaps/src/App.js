@@ -17,7 +17,10 @@ function App() {
   const isFetched = useSelector(state => state.isFetched)
 
   useEffect(() => {
-    dispatch(getApiData())
+    let timer = setInterval(() => {
+      dispatch(getApiData())
+    }, 5000);
+    return () => clearInterval(timer);
   }, [])
 
   return (
