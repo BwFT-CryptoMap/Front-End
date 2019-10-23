@@ -1,15 +1,17 @@
+
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {CoinList} from './components'
+
 
 
 import Blocklist from './components/TreeMap'
+import Header from './components/header'
 
 function App() {
   return (
     <div>
-      <Blocklist/>
+      <Header />
+      <Blocklist />
     </div>
   );
 }
