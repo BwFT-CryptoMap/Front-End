@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { Svg, Rect, Text } from '@potion/element'
 import { Treemap } from '@potion/layout'
@@ -8,15 +9,7 @@ import CoinCard from './CoinCard';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default () => {
-    const [mapData, setMapData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('https://data.messari.io/api/v1/markets/prices-legacy')
-            .then(res => setMapData(res.data.data.filter(data => data.currentMarketcap > 0).slice(0, 50)
-            ))
-            .catch(err => console.log(err))
-    }, [])
+    const mapData = useSelector(state => state.mapData).filter(data => data.currentMarketcap > 0).slice(0, 50)
 
     const getPercentage = (marketCap, totalMarketCap) => {
         return ((marketCap / totalMarketCap) * 100)
