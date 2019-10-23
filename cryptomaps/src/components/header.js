@@ -1,5 +1,5 @@
 import React from 'react'
-
+import TempNav from './TempNav'
 import '../landing.css'
 
 export default () => {
