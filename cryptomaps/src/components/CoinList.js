@@ -3,10 +3,35 @@ import axios from 'axios'
 
 import {useDispatch} from 'react-redux';
 
+import { makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+
 
 
 import CoinCard from './CoinCard';
+
 import SearchForm from './SearchForm';
+
+
+//////////////////////////////////Material UI//////////////////////////
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+    transform: 'translateZ(0)'
+  },
+}));
+
+
+////////////////////////Exported Component//////////////////
 
 function CoinList(props){
     const [displayInfo, setDisplayInfo] = useState([])
@@ -20,6 +45,16 @@ function CoinList(props){
 
     const [query, setQuery] = useState("");
 
+    const classes = useStyles();
+
+
+
+
+
+
+
+
+
   useEffect(() => {
     axios.get(`https://data.messari.io/api/v1/markets/prices-legacy`)
     .then(res => {
@@ -31,10 +66,13 @@ function CoinList(props){
          return null
         }
         else{
-          return item.symbol.toLowerCase().includes(query.toLowerCase())
+          return item.symbol.toLowerCase().startsWith(query.toLowerCase())
         }
        })
      setHighlight(items)
+    })
+    .catch(err => {
+      console.log("Did not receive data from API call", err)
     })
   }, [query])
 
@@ -43,24 +81,53 @@ function CoinList(props){
   }
 
 
-  const changeColor = () => {
-      if(highlight === true){
-          return {backgroundColor: "yellow"}
-      }
-      else{
-          return null
-      }
-  }
+  // const changeColor = () => {
+  //     if(highlight.includes(displayInfo)){
+  //         return {backgroundColor: "yellow"}
+  //     }
+  //     else{
+  //         return null
+  //     }
+  // }
 
+  console.log("this is highlight", highlight)
+
+
+
+  let sizeBox = Number(props.priceUsd);
+  console.log(sizeBox)
+  let percentageSizeBox = 0;
+  let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
+  percentageSizeBox = changeSizeBox(sizeBox)
+  console.log(props.symbol)
+  console.log("This is %", percentageSizeBox)
 
     return(
-        <Fragment>
+        <div className={classes.root}>
             <SearchForm eventHandle={eventHandle} query={query} />
-            {displayInfo.map(  (display, index) =>
-                 (<CoinCard key={index} symbol={display.symbol} priceUsd={display.priceUsd} percentageChange24HrUsd={display.percentageChange24HrUsd} style={changeColor}/>)
-                )}
-        </Fragment>
+       
+            <GridList cellHeight={percentageSizeBox * 3 || 0} spacing={1} className={classes.gridList} cols={3}>
+            {
+            
+            
+              displayInfo.map(  (display, index) =>
+              (
+               <CoinCard key={index} symbol={display.symbol} priceUsd={display.priceUsd} percentageChange24HrUsd={display.percentageChange24HrUsd} />)
+              )
+            
+             }
+            
+             </GridList>
+
+
+        </div>
     )
 }
 
 export default CoinList
+
+
+
+// style={`${highlight.includes(display.symbol)? {backgroundColor : 'yellow'} : {backgroundColor: "inherit"} }`}
+
+
