@@ -6,6 +6,7 @@ import { Treemap } from '@potion/layout'
 
 import CoinCard from './CoinCard';
 
+
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default () => {
@@ -21,6 +22,7 @@ export default () => {
             return { key: datum.id, value: getPercentage(datum.currentMarketcap, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd }
         })
     }
+
 
     return (
         <TransformWrapper defaultScale={1}>
@@ -38,7 +40,7 @@ export default () => {
                                 sum={datum => datum.value}
                                 size={[window.innerWidth, (window.innerHeight - 100)]}
                                 nodeEnter={d => ({ ...d, r: 0 })}
-                                animate
+                               
                             >
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
                                     <>
@@ -52,27 +54,37 @@ export default () => {
                                             stroke='black'
                                         />
                                         <Text
-                                            x={x0 + (x1 - x0) / 2}
-                                            y={y0 + (y1 - y0) / 2}
-                                            fontSize={Number((x1 - x0) / 10)}
-                                            color="black"
-                                        >
-                                            {data.symbol}
+                                        x={x0 + (x1 - x0) * .4}
+                                        y={y0 + (y1 - y0) / 2}
+                                       
+                                        fontSize={Number((x1 - x0) / 14)}
+                                        color="black">
+                                                <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
+                                                    
+                                                        {data.symbol}
+
+                                                        </tspan>
                                         </Text>
                                         <Text
-                                            x={x0 + (x1 - x0) / 2}
-                                            y={y0 + (y1 - y0) / 1.6}
-                                            fontSize={Number((x1 - x0) / 12)}
-                                            color="black">
-                                            {data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
+                                         x={x0 + (x1 - x0) * .4}
+                                         y={y0 + (y1 - y0) / 2}
+                                              
+                                        fontSize={Number((x1 - x0) / 14)}
+                                        color="black">
+                                            <tspan dy={Number((x1 - x0) / 14)} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
+    
+                                                   
+                                            </tspan>   
                                         </Text>
                                         <Text
-                                            x={x0 + (x1 - x0) / 2}
-                                            y={y0 + (y1 - y0) / 1.4}
-                                            fontSize={Number((x1 - x0) / 14)}
-                                            color="black">
-                                            {data.percentageChange24HrUsd ? data.percentageChange24HrUsd > 0 ? '+' + data.percentageChange24HrUsd.toFixed(2) + '%' : data.percentageChange24HrUsd.toFixed(2) + '%' : null}
-                                        </Text>
+                                        x={x0 + (x1 - x0) * .4}
+                                        y={y0 + (y1 - y0) / 2}
+                                        fontSize={Number((x1 - x0) / 14)}
+                                        color="black">
+                                            <tspan dy={Number(2 * ((x1 - x0) / 14))} >{data.percentageChange24HrUsd ? data.percentageChange24HrUsd > 0 ? '+' + data.percentageChange24HrUsd.toFixed(2) + '%' : data.percentageChange24HrUsd.toFixed(2) + '%' : null}</tspan>
+    
+                                       </Text>
+                                        
                                     </>
                                 ))}
                             </Treemap>
