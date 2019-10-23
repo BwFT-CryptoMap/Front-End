@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux'
-import axios from 'axios';
 import { Svg, Rect, Text } from '@potion/element'
 import { Treemap } from '@potion/layout'
-
-import CoinCard from './CoinCard';
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";

@@ -94,13 +94,13 @@ function CoinList(props){
 
 
 
-  let sizeBox = Number(props.priceUsd);
-  console.log(sizeBox)
-  let percentageSizeBox = 0;
-  let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
-  percentageSizeBox = changeSizeBox(sizeBox)
-  console.log(props.symbol)
-  console.log("This is %", percentageSizeBox)
+    let sizeBox = Number(props.priceUsd);
+console.log(sizeBox)
+let percentageSizeBox = 0;
+let changeSizeBox = () => {if(sizeBox === NaN){return 0}else{return sizeBox / 10};}
+percentageSizeBox = changeSizeBox(sizeBox)
+console.log(props.symbol)
+console.log("This is %", percentageSizeBox)
 
     return(
         <div className={classes.root}>
