@@ -30,8 +30,7 @@ function App() {
   return (
     <div>
       <Header />
-      <TempNav />
-   
+      <TempNav />   
     
     <Switch>
       <Route exact path ="/" render= {() => !isFetched ? <CircularProgress /> : <Blocklist />} />

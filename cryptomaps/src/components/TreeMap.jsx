@@ -5,7 +5,7 @@ import { Treemap } from '@potion/layout'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
+import  CoinCard  from './CoinCard';
 export default () => {
     const [selection, setSelection] = useState("24H")
     console.log("this is selection", selection)
@@ -19,7 +19,6 @@ export default () => {
     const getPercentage = (marketCap, totalMarketCap) => {
         return ((marketCap / totalMarketCap) * 100)
     }
-
     const arrangeData = (data) => {
         let totalMarketCap = data.reduce((a, c) => a + c.currentMarketcap, 0)
         return data.map(datum => {
