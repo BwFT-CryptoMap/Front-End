@@ -1,16 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
-import {CoinList} from './components'
+import TempNav from './components/TempNav';
+import {  Route, Link, Switch, Redirect } from "react-router-dom";
+import BlockList from "./components/TreeMap";
+import LiquidView from "./components/LiquidView";
+import ReportedVolView from "./components/ReportedVolView";
+import RealVolView from "./components/RealVolView";
+
 import Blocklist from './components/TreeMap'
-import TreeMap from './components/TreeMap';
+import Header from './components/header'
+import { getApiData } from './actions'
+
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 function App() {
+
+  const dispatch = useDispatch();
+  const isFetched = useSelector(state => state.isFetched)
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      dispatch(getApiData())
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [])
+
   return (
     <div>
-    {/* <CoinList/> */}
-    <TreeMap/>
-    </div>
+      <Header />
+      <TempNav />   
+    
+    <Switch>
+      <Route exact path ="/" render= {() => !isFetched ? <CircularProgress /> : <Blocklist />} />
+            <Route exact path="/liquid" render={() => <LiquidView/>} />
+            <Route exact path="/reported-volume" render={() => <ReportedVolView/>}/>
+            <Route exact path="/real-volume" render={()=> <RealVolView/>} />
+        </Switch> 
+        </div>
   );
 }
 

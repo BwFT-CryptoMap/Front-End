@@ -5,33 +5,34 @@ import { Treemap } from '@potion/layout'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import  CoinCard  from './CoinCard';
+
+
 export default () => {
     const [selection, setSelection] = useState("24H")
-    console.log("this is selection", selection)
+   
 
     let changeColor; 
     let changePerformanceText;
 
-
-    const mapData = useSelector(state => state.mapData).filter(data => data.currentMarketcap > 0).slice(0, 50)
+    const mapData = useSelector(state => state.mapData).filter(data => data.vol24HrUsd > 0).slice(0, 50)
 
     const getPercentage = (marketCap, totalMarketCap) => {
         return ((marketCap / totalMarketCap) * 100)
     }
+
     const arrangeData = (data) => {
-        let totalMarketCap = data.reduce((a, c) => a + c.currentMarketcap, 0)
+        let totalMarketCap = data.reduce((a, c) => a + c.vol24HrUsd, 0)
         return data.map(datum => {
-            return { key: datum.id, value: getPercentage(datum.currentMarketcap, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd, percentageChange7dUsd: datum.percentageChange7dUsd, percentageChange30dUsd: datum.percentageChange30dUsd, percentageChange1yrUsd: datum.percentageChange1yrUsd }
+            return { key: datum.id, value: getPercentage(datum.vol24HrUsd, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd, percentageChange7dUsd: datum.percentageChange7dUsd, percentageChange30dUsd: datum.percentageChange30dUsd, percentageChange1yrUsd: datum.percentageChange1yrUsd  }
         })
     }
 
-const handleChange = (e) => {
+    const handleChange = (e) => {
         setSelection(e.target.value)
 }
 
 const timeChange = (data) => {
-///took selection out of timechange params here AND below
+
     switch (selection) {
         case "24H": {
 
@@ -113,11 +114,11 @@ const timeChange = (data) => {
                                 <option value="30D">30D Performance</option>
                                 <option value="1Y">1Y Performance</option>
                             </select>
-</form>
+                        </form>
                     </div>
                     <TransformComponent>
                         <Svg width={window.innerWidth} height={window.innerHeight - 100}>
-                          <Treemap
+                            <Treemap
                                 data={{
                                     children: arrangeData(mapData)
                                 }}
@@ -127,7 +128,6 @@ const timeChange = (data) => {
                                
                             >
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
-                                   
                                     <>
                                     {timeChange(data)}
                                         <Rect
