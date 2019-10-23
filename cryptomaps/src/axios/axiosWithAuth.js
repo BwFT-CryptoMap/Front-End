@@ -9,7 +9,7 @@ import useLocalStorage from '../hooks/useLocalStorage'
 //const [authToken, setAuthToken] = useLocalStorage('token', null)
 
 const configOptions = {
-    baseUrl: 'http://urltoApi',
+    baseUrl: 'https://data.messari.io/api/v1/markets/prices-legacy',
     timeout: 3000,
     headers: {
         'Authorization': '',

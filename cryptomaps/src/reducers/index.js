@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 isFetched: true,
+                mapData: action.payload.data
             }
 
         }
