@@ -1,7 +1,10 @@
 .App {
   text-align: center;
+  background-color: #233A4F;
 }
-
+body {
+  background-color: #233A4F;
+}
 .App-logo {
   height: 40vmin;
 }
@@ -19,4 +22,32 @@
 
 .App-link {
   color: #09d3ac;
+}
+ 
+.selection {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.tools {
+  font-size: 1.5rem;
+  margin: 2px auto;
+  width: 19rem;
+}
+
+.tools button {
+  border: 1px solid #F29108;
+  border-radius: .7rem;
+  padding: .2rem;
+  cursor: pointer;
+  color: white;
+  background-color: #F29108;
+}
+
+#PercentChange {
+  border-radius: 1rem;
+  background-color: #2976C2;
+  border: 1px solid #2976C2;
+  color: white;
+  outline: none;
 }

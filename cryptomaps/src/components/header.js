@@ -1,5 +1,5 @@
 import React from 'react'
-
+import TempNav from './TempNav'
 import '../landing.css'
 
 export default () => {
@@ -8,7 +8,7 @@ export default () => {
         <header>
             <div className="content">
                 <div>
-                    <a href="https://messari.io/" classname="messariLogo">
+                    <a href="https://messari.io/" className="messariLogo">
                         <img src={require("../images/messari-Icon.svg")} alt="Messari Logo"></img>
                     </a>
                     <a href="https://messari.io" className="homeLogo">
