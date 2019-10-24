@@ -126,7 +126,7 @@ const fonterDoerer = (x0, x1, y0, y1) => {
                         </form>
                     </div>
                     <TransformComponent>
-                        <Svg width={window.innerWidth} height={window.innerHeight - 197}>
+                        <Svg maxWidth="100%" width={window.innerWidth} height={window.innerHeight - 197}>
                             <Treemap
                                 data={{
                                     children: arrangeData(mapData)
