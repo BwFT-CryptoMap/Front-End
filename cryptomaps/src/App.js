@@ -38,6 +38,7 @@ function App() {
             <Route exact path="/reported-volume" render={() => <ReportedVolView/>}/>
             <Route exact path="/real-volume" render={()=> <RealVolView/>} />
         </Switch> 
+      <footer className="App-footer"/>
         </div>
   );
 }

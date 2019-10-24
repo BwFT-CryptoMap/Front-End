@@ -5,6 +5,9 @@ import { Treemap } from '@potion/layout'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
+
+
 export default () => {
     const [selection, setSelection] = useState("24H")
 
@@ -136,8 +139,10 @@ const fonterDoerer = (x0, x1, y0, y1) => {
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
 
                                     <>
+
                                     {timeChange(data)}
                                     {fonterDoerer(x0, x1, y0, y1)}
+
                                         <Rect
                                             key={key}
                                             x={x0}

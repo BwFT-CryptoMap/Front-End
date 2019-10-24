@@ -12,6 +12,7 @@ body {
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,4 +51,18 @@ body {
   border: 1px solid #2976C2;
   color: white;
   outline: none;
+}
+
+
+.App-footer {
+  background-color: #E3EDF4;
+  min-height: 10vh;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin: 0
 }
