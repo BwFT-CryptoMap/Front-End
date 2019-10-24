@@ -32,7 +32,7 @@ export const postLoginUser = payload => dispatch => {
 export const postSignupUser = payload => dispatch => {
     dispatch({ type: SIGNUP_START })
     axiosWithAuth()
-        .post('https://cryptomap.herokuapp.com/api/register')
+        .post('https://cryptomap.herokuapp.com/api/register', payload)
         .then(res => dispatch({ type: SIGNUP_SUCCESS, payload: res.data.payload }))
         .catch(err => dispatch({ type: SIGNUP_FAIL, payload: err }))
 }
