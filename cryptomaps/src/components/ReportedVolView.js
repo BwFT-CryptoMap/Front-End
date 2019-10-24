@@ -148,7 +148,7 @@ const fonterDoerer = (x0, x1, y0, y1) => {
                                             width={x1 - x0}
                                             height={y1 - y0}
                                             fill={changeColor}
-                                            stroke='black'
+                                            stroke="#282c34"
                                         />
                                         <Text
                                         x={x0 + (x1 - x0) * .4}
