@@ -6,25 +6,20 @@ export default () => {
 
   return (
     <section>
-      <header>
+      <header className={"navBar"}>
 ​
             <nav>
             
-              <li>
+              
                 <Link to="/">MarketCap</Link>
-              </li>
-              <li>
+            
                 <Link to="/liquid">Liquid MarketCap</Link>
-              </li>
-​
-              <li>
+           
               <Link to="/reported-volume">Reported Volume</Link>
-              </li>
-​
-              <li>
+           
               <Link to="/real-volume">Real Volume</Link>
-              </li>
-        
+            
+              
           </nav>
 ​
       </header>
