@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TempNav from './TempNav'
+import Dialog from '@material-ui/core/Dialog'
 import '../landing.css'
 
+import LoginForm from './LoginForm'
+import SignupForm from './SignupForm'
+
 export default () => {
+    const [dialogsOpen, setDialogsOpen] = useState({ 'signup': false, 'login': false })
+
+    const toggleOpen = type => {
+        setDialogsOpen({ ...dialogsOpen, type: dialogsOpen[type] = !dialogsOpen[type] })
+    }
+
+    const handleLoginClose = () => {
+        toggleOpen('login')
+    }
+
+    const handleSignupClose = () => {
+        toggleOpen('signup')
+    }
 
     return (
         <header>
@@ -34,14 +51,21 @@ export default () => {
                     </button>
                 </div>
                 <div className="loginSignUp">
-                    <button className="loginBtn">
+                    <button onClick={() => toggleOpen('login')} className="loginBtn">
                         <span>Login</span>
                     </button>
-                    <button className="signUpBtn">
+                    <button onClick={() => toggleOpen('signup')} className="signUpBtn">
                         <span>Sign Up</span>
                     </button>
                 </div>
             </div>
+
+            <Dialog onClose={handleLoginClose} open={dialogsOpen['login']}>
+                <LoginForm />
+            </Dialog>
+            <Dialog onClose={handleSignupClose} open={dialogsOpen['signup']}>
+                <SignupForm />
+            </Dialog>
         </header>
     )
 }
