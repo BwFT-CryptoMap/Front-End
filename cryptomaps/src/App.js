@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
 import TempNav from './components/TempNav';
 import {  Route, Link, Switch, Redirect } from "react-router-dom";
-import BlockList from "./components/TreeMap";
+
 import LiquidView from "./components/LiquidView";
 import ReportedVolView from "./components/ReportedVolView";
 import RealVolView from "./components/RealVolView";

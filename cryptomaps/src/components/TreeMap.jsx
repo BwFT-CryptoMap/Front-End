@@ -5,12 +5,16 @@ import { Treemap } from '@potion/layout'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
+
+
 export default () => {
     const [selection, setSelection] = useState("24H")
 
     let changeColor;
     let changePerformanceText;
 
+    let matchGreaterBorder;
 
     const mapData = useSelector(state => state.mapData).filter(data => data.currentMarketcap > 0).slice(0, 50)
 
@@ -96,6 +100,15 @@ export default () => {
 
     }
 
+const fonterDoerer = (x0, x1, y0, y1) => {
+
+    matchGreaterBorder =  x1-x0 < y1-y0 ? ((x1 - x0) / 8) : ((y1 - y0) / 8);
+  
+    return matchGreaterBorder
+  
+  
+  }
+
     return (
         <TransformWrapper defaultScale={1}>
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
@@ -126,7 +139,10 @@ export default () => {
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
 
                                     <>
-                                        {timeChange(data)}
+
+                                    {timeChange(data)}
+                                    {fonterDoerer(x0, x1, y0, y1)}
+
                                         <Rect
                                             key={key}
                                             x={x0}
@@ -137,36 +153,38 @@ export default () => {
                                             stroke='black'
                                         />
                                         <Text
-                                            x={x0 + (x1 - x0) * .4}
-                                            y={y0 + (y1 - y0) / 2}
 
-                                            fontSize={Number((x1 - x0) / 14)}
-                                            color="black">
-                                            <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
+                                        x={x0 + (x1 - x0) * .4}
+                                        y={y0 + (y1 - y0) / 2}
+                                       
+                                        fontSize={matchGreaterBorder}
+                                        color="black">
+                                                <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
+                                                    
+                                                        {data.symbol}
 
-                                                {data.symbol}
-
-                                            </tspan>
+                                                        </tspan>
                                         </Text>
                                         <Text
-                                            x={x0 + (x1 - x0) * .4}
-                                            y={y0 + (y1 - y0) / 2}
-
-                                            fontSize={Number((x1 - x0) / 14)}
-                                            color="black">
-                                            <tspan dy={Number((x1 - x0) / 14)} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
-
-
-                                            </tspan>
+                                         x={x0 + (x1 - x0) * .4}
+                                         y={y0 + (y1 - y0) / 2}
+                                              
+                                        fontSize={matchGreaterBorder}
+                                        color="black">
+                                            <tspan dy={matchGreaterBorder} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
+    
+                                                   
+                                            </tspan>   
                                         </Text>
                                         <Text
-                                            x={x0 + (x1 - x0) * .4}
-                                            y={y0 + (y1 - y0) / 2}
-                                            fontSize={Number((x1 - x0) / 14)}
-                                            color="black">
-                                            <tspan dy={Number(2 * ((x1 - x0) / 14))} >{changePerformanceText}</tspan>
-
-                                        </Text>
+                                        x={x0 + (x1 - x0) * .4}
+                                        y={y0 + (y1 - y0) / 2}
+                                        fontSize={matchGreaterBorder}
+                                        color="black">
+                                            <tspan dy={2 * Number(matchGreaterBorder)} >{changePerformanceText}</tspan>
+    
+                                       </Text>
+                                        
 
                                     </>
                                 ))}

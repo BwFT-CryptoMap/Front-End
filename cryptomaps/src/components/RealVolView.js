@@ -12,6 +12,8 @@ export default () => {
     let changeColor; 
     let changePerformanceText;
 
+    let matchGreaterBorder;
+
     const mapData = useSelector(state => state.mapData).filter(data => data.realVol24HrUsd > 0).slice(0, 50)
 
     const getPercentage = (marketCap, totalMarketCap) => {
@@ -19,9 +21,9 @@ export default () => {
     }
 
     const arrangeData = (data) => {
-        let totalMarketCap = data.reduce((a, c) => a + c.currentMarketcap, 0)
+        let totalMarketCap = data.reduce((a, c) => a + c.realVol24HrUsd, 0)
         return data.map(datum => {
-            return { key: datum.id, value: getPercentage(datum.currentMarketcap, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd, percentageChange7dUsd: datum.percentageChange7dUsd, percentageChange30dUsd: datum.percentageChange30dUsd, percentageChange90dUsd: datum.percentageChange90dUsd }
+            return { key: datum.id, value: getPercentage(datum.realVol24HrUsd, totalMarketCap), symbol: datum.symbol, priceUsd: datum.priceUsd, percentageChange24HrUsd: datum.percentageChange24HrUsd, percentageChange7dUsd: datum.percentageChange7dUsd, percentageChange30dUsd: datum.percentageChange30dUsd, percentageChange90dUsd: datum.percentageChange90dUsd }
         })
     }
 
@@ -99,6 +101,16 @@ switch (selection) {
 
 }
 
+
+const fonterDoerer = (x0, x1, y0, y1) => {
+
+    matchGreaterBorder =  x1-x0 < y1-y0 ? ((x1 - x0) / 8) : ((y1 - y0) / 8);
+
+  return matchGreaterBorder
+
+
+}
+
     return (
         <TransformWrapper defaultScale={1}>
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
@@ -127,6 +139,8 @@ switch (selection) {
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
                                     <>
                                     {timeChange(data)}
+                                    {fonterDoerer(x0, x1, y0, y1)}
+                                    
                                         <Rect
                                             key={key}
                                             x={x0}
@@ -140,7 +154,7 @@ switch (selection) {
                                         x={x0 + (x1 - x0) * .4}
                                         y={y0 + (y1 - y0) / 2}
                                        
-                                        fontSize={Number((x1 - x0) / 14)}
+                                        fontSize={matchGreaterBorder}
                                         color="black">
                                                 <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
                                                     
@@ -152,9 +166,9 @@ switch (selection) {
                                          x={x0 + (x1 - x0) * .4}
                                          y={y0 + (y1 - y0) / 2}
                                               
-                                        fontSize={Number((x1 - x0) / 14)}
+                                        fontSize={matchGreaterBorder}
                                         color="black">
-                                            <tspan dy={Number((x1 - x0) / 14)} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
+                                            <tspan dy={matchGreaterBorder} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
     
                                                    
                                             </tspan>   
@@ -162,9 +176,9 @@ switch (selection) {
                                         <Text
                                         x={x0 + (x1 - x0) * .4}
                                         y={y0 + (y1 - y0) / 2}
-                                        fontSize={Number((x1 - x0) / 14)}
+                                        fontSize={matchGreaterBorder}
                                         color="black">
-                                            <tspan dy={Number(2 * ((x1 - x0) / 14))} >{changePerformanceText}</tspan>
+                                            <tspan dy={2 * Number(matchGreaterBorder)} >{changePerformanceText}</tspan>
     
                                        </Text>
                                         
