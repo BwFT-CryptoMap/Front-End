@@ -134,7 +134,7 @@ export default () => {
                                 }}
                                 sum={datum => datum.value}
                                 size={[window.innerWidth, (window.innerHeight - 197)]}
-                                nodeEnter={d => ({ ...d, r: 0 })}
+                                
 
                             >
                                 {nodes => nodes.map(({ key, x0, y0, x1, y1, data }) => (
