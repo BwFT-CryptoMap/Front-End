@@ -104,7 +104,7 @@ switch (selection) {
 
 const fonterDoerer = (x0, x1, y0, y1) => {
 
-  matchGreaterBorder =  x1-x0 > y1-y0 ? ((x1 - x0) / 18) : ((y1 - y0) / 40);
+    matchGreaterBorder =  x1-x0 < y1-y0 ? ((x1 - x0) / 8) : ((y1 - y0) / 8);
 
   return matchGreaterBorder
 
