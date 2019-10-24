@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-ro
 export default () => {
 
   return (
-    <section >
+    <section>
       <header>
 ​
             <nav>
