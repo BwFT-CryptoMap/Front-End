@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useSelector } from 'react-redux'
 import { Svg, Rect, Text } from '@potion/element'
 import { Treemap } from '@potion/layout'
+import Tooltip from '@material-ui/core/Tooltip'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -100,14 +101,14 @@ export default () => {
 
     }
 
-const fonterDoerer = (x0, x1, y0, y1) => {
+    const fonterDoerer = (x0, x1, y0, y1) => {
 
-    matchGreaterBorder =  x1-x0 < y1-y0 ? ((x1 - x0) / 8) : ((y1 - y0) / 8);
-  
-    return matchGreaterBorder
-  
-  
-  }
+        matchGreaterBorder = x1 - x0 < y1 - y0 ? ((x1 - x0) / 8) : ((y1 - y0) / 8);
+
+        return matchGreaterBorder
+
+
+    }
 
     return (
         <TransformWrapper defaultScale={1}>
@@ -140,57 +141,72 @@ const fonterDoerer = (x0, x1, y0, y1) => {
 
                                     <>
 
-                                    {timeChange(data)}
-                                    {fonterDoerer(x0, x1, y0, y1)}
-
-                                        <Rect
-                                            key={key}
-                                            x={x0}
-                                            y={y0}
-                                            width={x1 - x0}
-                                            height={y1 - y0}
-                                            fill={changeColor}
-                                            stroke="#282c34"
-                                        />
-                                        <Text
-                                        x={x0 + (x1 - x0) * .4}
-                                        y={y0 + (y1 - y0) / 2}
-                                       
-                                        fontSize={matchGreaterBorder}
-                                        color="black">
-                                                <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
-                                                    
-                                                        {data.symbol}
-
-                                                        </tspan>
-                                        </Text>
-                                        <Text
-                                         x={x0 + (x1 - x0) * .4}
-                                         y={y0 + (y1 - y0) / 2}
+                                        {timeChange(data)}
+                                        {fonterDoerer(x0, x1, y0, y1)}
+                                        {// Title can be a react fragment filled with whatevz?
+                                        }
+                                        <Tooltip title={
+                                            <Fragment>
+                                            <p> {data.symbol}</p>
+                                            <p>{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}</p>
+                                           <p>{changePerformanceText}</p>
+                                            </Fragment>
+                                        }>
+                                            <Rect
+                                                key={key}
+                                                x={x0}
+                                                y={y0}
+                                                width={x1 - x0}
+                                                height={y1 - y0}
+                                                fill={changeColor}
+                                                stroke='#01579b'
                                               
-                                        fontSize={matchGreaterBorder}
-                                        color="black">
-                                            <tspan dy={matchGreaterBorder} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
-    
-                                                   
-                                            </tspan>   
+                                            />
+                                         
+
+                                        </Tooltip>
+                                        <Text
+
+                                            x={x0 + (x1 - x0) * .4}
+                                            y={y0 + (y1 - y0) / 2}
+
+                                            fontSize={matchGreaterBorder}
+                                            color="black">
+                                            <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
+
+                                                {data.symbol}
+
+                                            </tspan>
                                         </Text>
                                         <Text
-                                        x={x0 + (x1 - x0) * .4}
-                                        y={y0 + (y1 - y0) / 2}
-                                        fontSize={matchGreaterBorder}
-                                        color="black">
+                                            x={x0 + (x1 - x0) * .4}
+                                            y={y0 + (y1 - y0) / 2}
+
+                                            fontSize={matchGreaterBorder}
+                                            color="black">
+                                            <tspan dy={matchGreaterBorder} >{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}
+
+
+                                            </tspan>
+                                        </Text>
+                                        <Text
+                                            x={x0 + (x1 - x0) * .4}
+                                            y={y0 + (y1 - y0) / 2}
+                                            fontSize={matchGreaterBorder}
+                                            color="black">
                                             <tspan dy={2 * Number(matchGreaterBorder)} >{changePerformanceText}</tspan>
-    
-                                       </Text>
-                                        
+
+                                        </Text>
+
+
                                     </>
                                 ))}
                             </Treemap>
                         </Svg >
                     </TransformComponent>
                 </React.Fragment>
-            )}
-        </TransformWrapper>
+            )
+            }
+        </TransformWrapper >
     )
 }

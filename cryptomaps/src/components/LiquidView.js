@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import { useSelector } from 'react-redux'
 import { Svg, Rect, Text } from '@potion/element'
 import { Treemap } from '@potion/layout'
+import Tooltip from '@material-ui/core/Tooltip'
 
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -140,6 +141,13 @@ const fonterDoerer = (x0, x1, y0, y1) => {
                                     <>
                                     {timeChange(data)}
                                     {fonterDoerer(x0, x1, y0, y1)}
+                                    <Tooltip title={
+                                        <Fragment>
+                                        <p> {data.symbol}</p>
+                                        <p>{data.priceUsd ? '$' + data.priceUsd.toFixed(2) : null}</p>
+                                       <p>{changePerformanceText}</p>
+                                        </Fragment>
+                                    }>
                                         <Rect
                                             key={key}
                                             x={x0}
@@ -147,15 +155,20 @@ const fonterDoerer = (x0, x1, y0, y1) => {
                                             width={x1 - x0}
                                             height={y1 - y0}
                                             fill={changeColor}
-                                            stroke="#282c34"
+                                            stroke='#01579b'
+                                          
                                         />
+                                     
+
+                                    </Tooltip>
+                                      
                                         <Text
                                         x={x0 + (x1 - x0) * .4}
                                         y={y0 + (y1 - y0) / 2}
                                        
                                         fontSize={matchGreaterBorder}
-                                        color="black">
-                                                <tspan x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
+                                        color="#01579b">
+                                                <tspan color="#01579b" x={x0 + (x1 - x0) * .4} y={y0 + (y1 - y0) / 2} >
                                                     
                                                         {data.symbol}
 
